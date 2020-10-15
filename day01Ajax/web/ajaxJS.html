@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function fun() {
+            //获取核心对象
+            var xmlHttp;
+            if(window.XMLHttpRequest){
+                xmlHttp = new XMLHttpRequest();
+            }else {
+                xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            //获取连接
+            /**
+             * 参数：
+             *  1、请求方式：get、post
+             *  2、请求的url
+             *  3、同步或异步请求：true(异步)或false(同步)
+             */
+            xmlHttp.open("GET","ajaxServlet?username=tom",true);
+
+            //3、发送请求
+            xmlHttp.send();
+            //4、接受并处理服务器响应的结果
+            //当xmlHttp就绪状态改变时，触发事件onreadystatechange
+            xmlHttp.onreadystatechange = function () {
+                if(xmlHttp.readyState == 4 && xmlHttp.status ==200){
+                    //获取服务器响应的结果
+                    var responseText = xmlHttp.responseText;
+                    alert(responseText);
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <input type="submit" value="发送ajax请求" onclick="fun();">
+    <input type="text">
+
+</body>
+</html>
